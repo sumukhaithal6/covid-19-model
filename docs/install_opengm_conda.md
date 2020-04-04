@@ -77,7 +77,17 @@ You can deactivate the environment by running this command:
 
 ## Alternative installation methods
 
-TODO: using the docker image
+### Using the docker image
+
+Tristan Deleu has created a docker image with OpenGM and JupyterLab. If you have docker installed, this command should work out of the box: 
+
+```
+docker run --rm -v $(pwd):/home/notebooks -p 8888:8888 tristandeleu/opengm:python2
+```
+
+This command launches a jupyter lab instance, to experiment with opengm on notebooks. 
+
+
 
 TODO: using the packages of the distribution
 
