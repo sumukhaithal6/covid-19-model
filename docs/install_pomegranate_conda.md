@@ -1,4 +1,4 @@
-# installing pomegranate (with python interface)
+# Installing pomegranate (with python interface)
 
 This note explains the steps for installing pomegranate using the package management system *conda*. This is not the only way to install pomegranate, but one of the fastest ways.  
 
