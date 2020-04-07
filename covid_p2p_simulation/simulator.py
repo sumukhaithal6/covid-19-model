@@ -436,6 +436,12 @@ class Human(object):
             if self.is_susceptible and is_exposed:
                 self.infection_timestamp = self.env.timestamp
 
+            human_signal_strength = 0.0
+            if (distance <= INFECTION_RADIUS and (t_near * TICK_MINUTE) > INFECTION_DURATION):
+                human_signal_strength = p_infection
+            signal_strength = 1 - ((1 - human_signal_strength) *
+                                   (1 - location.contamination_probability))
+
             Event.log_encounter(self, h,
                                 location=location,
                                 duration=t_near,
@@ -443,7 +449,7 @@ class Human(object):
                                 # cm  #TODO: prop to Area and inv. prop to capacity
                                 time=self.env.timestamp,
                                 # latent={"infected":self.is_exposed},
-                                signal_strength=p_infection
+                                signal_strength=signal_strength
                                 )
 
         yield self.env.timeout(duration / TICK_MINUTE)
