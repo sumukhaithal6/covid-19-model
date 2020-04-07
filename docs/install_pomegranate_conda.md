@@ -30,8 +30,6 @@ and then install pomegranate using this command:
 
 If this doesn't work out because some libraries are missing, you can install them just like we installed *hdf5*. 
 
-In order to test the installation, run the following piece of code:
-
 You can deactivate the environment by running this command:
 
 ```
