@@ -137,17 +137,20 @@ class Event:
         loc_unobs = {key:getattr(location, key) for key in loc_unobs_keys}
         loc_unobs['location_p_infection'] = location.contamination_probability / location.social_contact_factor
         other_obs = {'duration':duration, 'distance':distance}
+        other_unobs = {'human1_id': human1.name, 'human2_id': human2.name}
 
         both_have_app = human1.has_app and human2.has_app
         for i, human in [(0, human1), (1, human2)]:
             if both_have_app:
                 obs_payload = {**loc_obs, **other_obs, 'human1':obs[i], 'human2':obs[1-i]}
-                unobs_payload = {**loc_unobs, 'signal_strength':signal_strength, 'human1':unobs[i], 'human2':unobs[1-i]}
+                unobs_payload = {**loc_unobs, **other_unobs, 
+                'signal_strength':signal_strength, 'human1':unobs[i], 'human2':unobs[1-i]}
             else:
                 obs_payload = {}
-                unobs_payload = { **loc_obs, **loc_unobs, **other_obs,
+                unobs_payload = { **loc_obs, **loc_unobs, 
+                                  **other_obs, **other_unobs,
                                     'signal_strength':signal_strength,
-                                    'human1':{**obs[i], **unobs[i]},
+                                    'human1': {**obs[i], **unobs[i]},
                                     'human2': {**obs[1-i], **unobs[1-i]} }
 
             human.events.append({
